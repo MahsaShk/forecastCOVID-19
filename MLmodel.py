@@ -47,5 +47,3 @@ class ridge(MLmodel):
     def score(self, xTest, yTest):
         return self.model.score(self, xTest, yTest)
 
-if __name__ == "__main__":
-    xgb1 = xgb()

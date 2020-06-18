@@ -19,10 +19,14 @@ class forecaster():
         self._predName = None
         self._params = None
         self.curPred = None
-        #group train set
-        self.traingroups = self.data.train.groupby(['Province_State','Country_Region'])
-        #group test set
-        self.testgroups  = self.data.test.groupby(['Province_State','Country_Region'])
+        
+        if self.data.train and self.data.test:
+            #group train set
+            self.traingroups = self.data.train.groupby(['Province_State','Country_Region'])
+            #group test set
+            self.testgroups  = self.data.test.groupby(['Province_State','Country_Region'])
+        
+            
         
     @property
     def predName(self):
@@ -102,17 +106,3 @@ class forecaster():
         filt = (self.data.test['Province_State']==name[0]) & (self.data.test['Country_Region']==name[1])
         self.data.test.loc[filt,'Fatalities'] = y_Ftl_Test
 
-if __name__ == "__main__":
-
-    trainpath = 'covid19-global-forecasting-week-3/train.csv'
-    testpath = 'covid19-global-forecasting-week-3/test.csv'
-    data = Data()
-    data.read_data(trainpath, testpath)
-    data.preprocess()
-    f = forecaster(data)
-    f.predName = 'xgb'
-    f.forecast()
-    
-    name = ('Empty', 'Afghanistan') 
-    filt = (data.test['Province_State']==name[0]) & (data.test['Country_Region']==name[1])
-    print(data.test.loc[filt,['ConfirmedCases','Fatalities']])
