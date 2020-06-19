@@ -26,8 +26,6 @@ class forecaster():
             #group test set
             self.testgroups  = self.data.test.groupby(['Province_State','Country_Region'])
         
-            
-        
     @property
     def predName(self):
         return self._predName
@@ -61,16 +59,11 @@ class forecaster():
         cc = self.data.train.loc[filt,['Fatalities']]
         yTr = np.array([cc.iloc[i+wsize] for i in range(0,cc.shape[0]-wsize, step)])
 
-
-    
     def forecast(self):
         for name, traingr in self.traingroups:
             print('---Processing ', name)
             if (name ==('Quebec','Canada') or name == ('Washington', 'US') or name ==('Empty', 'Afghanistan') ):
                 self._forecastOneGroup(traingr, name)
-
-        
-
 
     def _forecastOneGroup (self, traingr, name):
         # training set x and y split
@@ -89,6 +82,9 @@ class forecaster():
         xTest = np.reshape(xTest, (l,1))
         
         #predictor strategy selection
+        if self.curPred == None:
+            raise ValueError('Error: predictor name is not defined')
+
         self.curPred.reset(self._params)
         self.curPred.train(xTr,y_CC_Tr)
         y_CC_Test = self.curPred.predict(xTest)
@@ -98,7 +94,6 @@ class forecaster():
         self.curPred.train(xTr,y_Ftl_Tr)
         y_Ftl_Test = self.curPred.predict(xTest)
         print(f'---predicting Fatalities done')
-
 
         filt = (self.data.test['Province_State']==name[0]) & (self.data.test['Country_Region']==name[1])
         self.data.test.loc[filt,'ConfirmedCases'] = y_CC_Test

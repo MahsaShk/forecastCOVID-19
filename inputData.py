@@ -8,8 +8,6 @@ class Data:
         self.train = None
         self.test = None
         
-
-
     def read_data(self,trainpath, testpath):
         try:
             self.train = pd.read_csv (trainpath)
