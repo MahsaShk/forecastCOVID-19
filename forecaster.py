@@ -20,11 +20,13 @@ class forecaster():
         self._params = None
         self.curPred = None
         
-        if self.data.train and self.data.test:
-            #group train set
-            self.traingroups = self.data.train.groupby(['Province_State','Country_Region'])
-            #group test set
-            self.testgroups  = self.data.test.groupby(['Province_State','Country_Region'])
+        assert isinstance( self.data.train,pd.DataFrame), 'Error: no data.train or data.test was defined!'
+        assert isinstance( self.data.test,pd.DataFrame), 'Error: no data.train or data.test was defined!'
+        #group train set
+        self.traingroups = self.data.train.groupby(['Province_State','Country_Region'])
+        #group test set
+        self.testgroups  = self.data.test.groupby(['Province_State','Country_Region'])
+        
         
     @property
     def predName(self):
@@ -40,7 +42,7 @@ class forecaster():
             self.curPred = ridge()
             self._params = params_ridge
         else:
-            raise ValueError('Preciction name does not exist!')
+            raise ValueError('Error: preciction name does not exist!')
                 
     @property
     def params(self):

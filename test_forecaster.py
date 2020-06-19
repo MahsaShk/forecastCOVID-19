@@ -1,25 +1,44 @@
 import unittest
 from inputData import Data
 from forecaster import forecaster
+import pandas as pd
 
 class TestForcaster(unittest.TestCase):
-    def setUp (self):
-        self.data = Data() 
 
-    def tearDown(self):
-        pass
+    @classmethod
+    def setUpClass (self):
+        
+        self.trainData = pd.DataFrame({ 'Province_State':['Washington','Washington'],
+                    'Country_Region':['US','US'] ,   'Date':['2020-06-01','2020-06-02'],  
+                     'ConfirmedCases':['100','150'],  'Fatalities':['10','15'] })
+
+        self.testData = pd.DataFrame({ 'Province_State':['Washington','Washington'],
+                    'Country_Region':['US','US'] ,   'Date':['2020-06-01','2020-06-02'],  
+                     'ConfirmedCases':['100','150'],  'Fatalities':['10','15'] })
+
+    @classmethod
+    def tearDownClass(self):
+        del self.trainData, self.testData
 
     def test_predName(self): 
-        f = forecaster(self.data)
+        data = Data(self.trainData,self.testData)
+        forcst = forecaster(data)
 
-        f.predName = 'xgb'
-        self.assertEqual(f.predName, 'xgb')
+        forcst.predName = 'xgb'
+        self.assertEqual(forcst.predName, 'xgb')
 
-        f.predName = 'ridge'
-        self.assertEqual(f.predName, 'ridge')
+        forcst.predName = 'ridge'
+        self.assertEqual(forcst.predName, 'ridge')
 
         with self.assertRaises(ValueError):
-            f.predName = 'mlp'
+            forcst.predName = 'mlp'
+
+    def test_init(self): 
+        data = Data()
+        with self.assertRaises(AssertionError):
+            forcst = forecaster(data)
+        
+
         
 if __name__ == "__main__":
     unittest.main()

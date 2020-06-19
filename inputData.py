@@ -4,9 +4,9 @@ import numpy as np
 
 
 class Data:
-    def __init__(self):
-        self.train = None
-        self.test = None
+    def __init__(self, trainData = None, testData = None):
+        self.train = trainData
+        self.test = testData
         
     def read_data(self,trainpath, testpath):
         try:
@@ -16,6 +16,7 @@ class Data:
             print('Error in reading CSV files, please enter the valid train and test file pathes')
         else:
             print('---Loading CSV files finished.')
+    
 
     def profileReport(self, outputfile, minmode=False):
         trainpProf = ProfileReport(self.train, minimal = minmode)
