@@ -17,15 +17,17 @@ class Data:
         else:
             print('---Loading CSV files finished.')
     
-
-    def profileReport(self, outputfile, minmode=False):
-        trainpProf = ProfileReport(self.train, minimal = minmode)
-        trainpProf.to_file(output_file = 'train_' + outputfile)
-        trainpProf = ProfileReport(self.test, minimal = minmode)
-        trainpProf.to_file(output_file = 'test_' + outputfile)
+    def profileReport(self, minmode=False, toFile=True):
+        trainProf = ProfileReport(self.train, minimal = minmode)
+        testProf = ProfileReport(self.test, minimal = minmode)
+        if toFile:
+            trainProf.to_file(output_file = 'train_profileReport.html')
+            testProf.to_file(output_file = 'test_profileReport.html')
         print('---Profiling train and test set finished.')
-    
+        
+
     def preprocess(self):
+        
         #preprocess on train set
         self.train['Province_State'].fillna('Empty', inplace=True) # relace missing values
         self.train['Date'] = pd.to_datetime(self.train['Date'],format='%Y-%m-%d')  # convert from str to datetime

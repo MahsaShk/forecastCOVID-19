@@ -9,6 +9,7 @@ testpath = 'covid19-global-forecasting-week-3/test.csv'
 # Read data and apply preprocessing
 data = Data()
 data.read_data(trainpath, testpath)
+data.profileReport()
 data.preprocess()
 
 # Select the ML model
