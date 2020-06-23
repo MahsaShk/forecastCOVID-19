@@ -63,7 +63,7 @@ class forecaster():
 
     def forecast(self):
         for name, traingr in self.traingroups:
-            print('---Processing ', name)
+            #print('---Processing ', name)
             if (name ==('Quebec','Canada') or name == ('Washington', 'US') or name ==('Empty', 'Afghanistan') ):
                 self._forecastOneGroup(traingr, name)
 
