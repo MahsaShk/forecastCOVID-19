@@ -18,11 +18,22 @@ class Data:
             print('---Loading CSV files finished.')
     
     def profileReport(self, minmode=False, toFile=True):
+        print('-'*40) 
+        print('Listing the first two lines of training set:\n') 
+        print(self.train.head(2))
+        print('\n')
+        print('-'*40)
+        
+        print('Start profile reporting using pandas_profiling package:\n')       
         trainProf = ProfileReport(self.train, minimal = minmode)
         testProf = ProfileReport(self.test, minimal = minmode)
         if toFile:
             trainProf.to_file(output_file = 'train_profileReport.html')
             testProf.to_file(output_file = 'test_profileReport.html')
+        print('Check the complete profiling report in train_profileReport.html and test_profileReport.html')  
+        print('-'*40)
+        
+        print('\n')
         print('---Profiling train and test set finished.')
         
 
