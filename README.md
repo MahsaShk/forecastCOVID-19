@@ -1,8 +1,10 @@
 # forecastCOVID-19
 
+OOP design to predict confirmed cases and fatalities based on <a href="https://www.kaggle.com/c/covid19-global-forecasting-week-3">COVID-19 Global Forecasting Dataset </a> using Pandas.
+
 ## Data:
 
-OOP design to predict confirmed cases and fatalities based on <a href="https://www.kaggle.com/c/covid19-global-forecasting-week-3">COVID-19 Global Forecasting Dataset </a>.
+In this project, the week 3 of the <a href="https://www.kaggle.com/c/covid19-global-forecasting-week-3">COVID-19 Global Forecasting Dataset </a> is used.
 
 Each line of the training set includes 'Id', 'Province_State', 'Country_Region', 'Date', 'ConfirmedCases', 'Fatalities'.
 
