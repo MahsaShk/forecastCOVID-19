@@ -17,6 +17,6 @@ In this project, Pandas DataFrame is used to handle data processing andd apply p
 
 Class 'MLmodel' is designed as an abstract class. 'xgb' (XGBoost) and 'ridge' (Ridge) regression classes are derived from 'MLmodel'.
 
-The class 'forcaster' creates a 'Data' and a 'MLmodel' instance. This class implements the forcasting per "'Province_State','Country_Region'" group.
+The class 'forecaster' creates a 'Data' and an 'MLmodel' instance. This class implements the forecasting per "'Province_State','Country_Region'" group.
 
 The <a href="jupyter-Demo.ipynb"> Jupyter Demo notebook</a> provides an example about how to run the code on the Covid-19 dataset.
